@@ -19,7 +19,8 @@
  '(tool-bar-mode nil)
  '(vc-annotate-background nil)
  '(vc-annotate-color-map (quote ((20 . "#cc6666") (40 . "#de935f") (60 . "#f0c674") (80 . "#b5bd68") (100 . "#8abeb7") (120 . "#81a2be") (140 . "#b294bb") (160 . "#cc6666") (180 . "#de935f") (200 . "#f0c674") (220 . "#b5bd68") (240 . "#8abeb7") (260 . "#81a2be") (280 . "#b294bb") (300 . "#cc6666") (320 . "#de935f") (340 . "#f0c674") (360 . "#b5bd68"))))
- '(vc-annotate-very-old-color nil))
+ '(vc-annotate-very-old-color nil)
+ '(cursor-in-non-selected-windows nil))
 
 ;; Package.el customization
 (require 'package)
@@ -119,7 +120,10 @@
      ))
 
 (set-face-attribute 'default nil :height 120)
-(set-cursor-color "white")
+;(set-cursor-color "white")
+(set-face-background 'cursor "white")
+(blink-cursor-mode 1)
+;(set-face-attribute 'cursor nil :background "white")
 
 (setq-default indent-tabs-mode nil)
 (setq tab-width 2)
@@ -222,7 +226,6 @@
 
 ;; Global keybindings
 (global-set-key (kbd "C-c n") 'cleanup-buffer)
-(global-set-key (kbd "C-M-h") 'backward-kill-word)
 (global-set-key (kbd "C-c g") 'google)
 
 (defun smarter-move-beginning-of-line (arg)
