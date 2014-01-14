@@ -97,6 +97,7 @@
 ;; CIDER
 (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
 (setq cider-popup-stacktraces nil)
+(setq cider-repl-use-clojure-font-lock t)
 
 ;; Haskell mode
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
