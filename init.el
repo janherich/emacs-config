@@ -103,6 +103,9 @@
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
 
+;; Enable flyspell on text-modes
+(add-hook 'text-mode-hook 'turn-on-flyspell)
+
 ;; Super Tab
 (require 'smart-tab)
 (global-smart-tab-mode 1)
@@ -121,10 +124,10 @@
      ))
 
 (set-face-attribute 'default nil :height 120)
-;(set-cursor-color "white")
+                                        ;(set-cursor-color "white")
 (set-face-background 'cursor "white")
 (blink-cursor-mode 1)
-;(set-face-attribute 'cursor nil :background "white")
+                                        ;(set-face-attribute 'cursor nil :background "white")
 
 (setq-default indent-tabs-mode nil)
 (setq tab-width 2)
@@ -225,9 +228,16 @@
                                              (region-end))
                          (read-string "Google: "))))))
 
+;; Find init file function
+(defun find-user-init-file ()
+  "Edit the `user-init-file', in another window."
+  (interactive)
+  (find-file-other-window user-init-file))
+
 ;; Global keybindings
 (global-set-key (kbd "C-c n") 'cleanup-buffer)
 (global-set-key (kbd "C-c g") 'google)
+(global-set-key (kbd "C-c i") 'find-user-init-file)
 
 (defun smarter-move-beginning-of-line (arg)
   "Move point back to indentation of beginning of line.
