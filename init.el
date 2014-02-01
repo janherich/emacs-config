@@ -117,18 +117,13 @@
 (eval-after-load "color-theme"
   '(progn
      (color-theme-initialize)
-     (color-theme-sanityinc-tomorrow-night)
-     ;; (color-theme-sanityinc-tomorrow-bright)
-     ;; (color-theme-sanityinc-tomorrow-blue)
-     ;; (color-theme-sanityinc-tomorrow-eighties)
-     ))
+     (color-theme-sanityinc-tomorrow-night)))
 
 (set-face-attribute 'default nil :height 120)
-                                        ;(set-cursor-color "white")
+;; (set-cursor-color "white")
 (set-face-background 'cursor "white")
 (blink-cursor-mode 1)
-                                        ;(set-face-attribute 'cursor nil :background "white")
-
+;; (set-face-attribute 'cursor nil :background "white") 
 (setq-default indent-tabs-mode nil)
 (setq tab-width 2)
 (setq-default truncate-lines t)
