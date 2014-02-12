@@ -60,6 +60,9 @@
 ;; Enable spell-checking comments in all prog modes
 ;; (add-hook 'prog-mode-hook 'flyspell-prog-mode)
 
+;; Enable global auto revert mode
+(global-auto-revert-mode t)
+
 ;; Textmate mode
 (require 'textmate)
 (textmate-mode)
@@ -192,8 +195,7 @@
      (define-key paredit-mode-map (kbd "<M-up>") 'paredit-backward-up)
      (define-key paredit-mode-map (kbd "<M-down>") 'paredit-forward-down)
      (define-key paredit-mode-map (kbd "<M-right>") 'paredit-forward)
-     (define-key paredit-mode-map (kbd "<M-left>") 'paredit-backward)
-     ))
+     (define-key paredit-mode-map (kbd "<M-left>") 'paredit-backward)))
 
 ;; Custom identation and cleanup functions
 (defun untabify-buffer ()
