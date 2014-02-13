@@ -43,15 +43,13 @@
                       haskell-mode
                       highlight-parentheses
                       magit
-                      markdown-mode
-                      mmm-mode
+                      markdown-mode 
                       paredit
                       pkg-info
                       rainbow-delimiters
                       s
                       smart-tab
-                      smartparens
-                      textmate))
+                      smartparens))
 
 (dolist (p my-packages)
   (when (not (package-installed-p p))
@@ -63,9 +61,8 @@
 ;; Enable global auto revert mode
 (global-auto-revert-mode t)
 
-;; Textmate mode
-(require 'textmate)
-(textmate-mode)
+;; Enable ido mode
+(ido-mode t)
 
 ;; Auto-complete
 (require 'auto-complete-config)
@@ -126,7 +123,7 @@
 ;; (set-cursor-color "white")
 (set-face-background 'cursor "white")
 (blink-cursor-mode 1)
-;; (set-face-attribute 'cursor nil :background "white") 
+;; (set-face-attribute 'cursor nil :background "white")
 (setq-default indent-tabs-mode nil)
 (setq tab-width 2)
 (setq-default truncate-lines t)
@@ -149,18 +146,6 @@
 (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
-
-;; Configure mmm-mode
-(require 'mmm-auto)
-(mmm-add-classes
- '((markdown-clojure
-    :submode clojure-mode
-    :face mmm-declaration-submode-face
-    :front "^```clojure[\n\r]+"
-    :back "^```$")))
-
-(setq mmm-global-mode 'maybe)
-(mmm-add-mode-ext-class 'markdown-mode nil 'markdown-clojure)
 
 ;; Configure org-babel
 (require 'ob)
@@ -186,16 +171,11 @@
 ;; Enable dired buffer replacing
 (put 'dired-find-alternate-file 'disabled nil)
 
-;; Electric indent-mode
-;; (electric-indent-mode +1)
-
 ;; Custom key bindings for paredit
 (eval-after-load 'paredit
   '(progn
      (define-key paredit-mode-map (kbd "<M-up>") 'paredit-backward-up)
-     (define-key paredit-mode-map (kbd "<M-down>") 'paredit-forward-down)
-     (define-key paredit-mode-map (kbd "<M-right>") 'paredit-forward)
-     (define-key paredit-mode-map (kbd "<M-left>") 'paredit-backward)))
+     (define-key paredit-mode-map (kbd "<M-down>") 'paredit-forward-down)))
 
 ;; Custom identation and cleanup functions
 (defun untabify-buffer ()
@@ -263,6 +243,3 @@
 
 ;; Set scheme interpreter to chicken-scheme
 (setq scheme-program-name "csi -:c")
-
-;; Kill scratch buffer on startup
-;; (kill-buffer "*scratch*")

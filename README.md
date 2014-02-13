@@ -8,9 +8,8 @@
 * Cider
 * Auto Completion
 * Lisp Indentation
-* Textmate mode
+* Ido mode
 * [Tomorrow Theme](https://github.com/chriskempson/tomorrow-theme)
 * Magit
+* Haskell mode
 * Markdown mode
-* MMM mode (with clojure submode defined) 
-
