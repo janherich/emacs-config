@@ -24,9 +24,11 @@
 
 ;; Package.el customization
 (require 'package)
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (package-initialize)
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.milkbox.net/packages/"))
+(add-to-list 'package-archives
+             '("org" . "http://orgmode.org/elpa/"))
 
 ;; Ensure installed packages
 (defvar my-packages '(ack
@@ -43,7 +45,8 @@
                       haskell-mode
                       highlight-parentheses
                       magit
-                      markdown-mode 
+                      markdown-mode
+                      org
                       paredit
                       pkg-info
                       rainbow-delimiters
@@ -63,6 +66,16 @@
 
 ;; Enable ido mode
 (ido-mode t)
+
+;; Org-latex export
+(require 'ox-latex)
+(add-to-list 'org-latex-packages-alist '("" "minted"))
+(setq org-latex-listings 'minted)
+
+(setq org-latex-pdf-process
+      '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
 
 ;; Auto-complete
 (require 'auto-complete-config)
