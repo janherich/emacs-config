@@ -161,25 +161,31 @@
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 
 ;; Configure org-babel
-(require 'ob)
+(require 'org)
+(require 'ob-clojure)
 
 (org-babel-do-load-languages
  'org-babel-load-languages
- '((sh . t)))
+ '((sh . t)
+   (emacs-lisp . t)
+   (clojure . t)))
+
+(setq org-babel-clojure-backend 'cider)
+(require 'cider)
+
+(setq org-edit-src-content-indentation 0
+      org-src-tab-acts-natively t
+      org-confirm-babel-evaluate nil
+      org-src-fontify-natively t)
 
 (add-to-list 'org-babel-tangle-lang-exts '("clojure" . "clj"))
 
 (defvar org-babel-default-header-args:clojure
   '((:results . "silent") (:tangle . "yes")))
 
-(defun org-babel-execute:clojure (body params)
-  (lisp-eval-string body)
-  "Done!")
+;; (defun org-babel-execute:clojure (body params) (lisp-eval-string body) "Done!")
 
-(provide 'ob-clojure)
-
-(setq org-src-fontify-natively t)
-(setq org-confirm-babel-evaluate nil)
+;; (provide 'ob-clojure)
 
 ;; Enable dired buffer replacing
 (put 'dired-find-alternate-file 'disabled nil)
