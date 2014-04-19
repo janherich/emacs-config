@@ -31,8 +31,7 @@
              '("org" . "http://orgmode.org/elpa/"))
 
 ;; Ensure installed packages
-(defvar my-packages '(ack
-                      auto-complete
+(defvar my-packages '(auto-complete
                       cider
                       cljsbuild-mode
                       clojure-mode
