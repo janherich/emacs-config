@@ -35,10 +35,10 @@
                       cider
                       cljsbuild-mode
                       clojure-mode
-                      clojure-test-mode
                       clojure-cheatsheet
                       color-theme
                       color-theme-sanityinc-tomorrow
+                      csv-mode
                       dash
                       epl
                       haskell-mode
@@ -261,3 +261,6 @@
 
 ;; Set scheme interpreter to chicken-scheme
 (setq scheme-program-name "csi -:c")
+
+;; Set tramp default method to be ssh
+(setq tramp-default-method "ssh")
