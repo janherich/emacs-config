@@ -26,21 +26,21 @@
 (require 'package)
 (package-initialize)
 (add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/"))
-(add-to-list 'package-archives
-             '("org" . "http://orgmode.org/elpa/"))
+             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+;;(add-to-list 'package-archives '("melpa-stable" . "http://melpa-stable.milkbox.net/packages") t)
+(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
+;;(add-to-list 'package-pinned-packages '(cider . "melpa-stable") t)
 
 ;; Ensure installed packages
 (defvar my-packages '(auto-complete
-                      cider
-                      cljsbuild-mode
+                      ;;cider
                       clojure-mode
-                      clojure-cheatsheet
                       color-theme
                       color-theme-sanityinc-tomorrow
                       csv-mode
                       dash
                       epl
+                      erlang
                       haskell-mode
                       highlight-parentheses
                       magit
@@ -110,6 +110,7 @@
 (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
 (setq cider-popup-stacktraces nil)
 (setq cider-repl-use-clojure-font-lock t)
+(setq nrepl-log-messages t)
 
 ;; Haskell mode
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
