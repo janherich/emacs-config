@@ -33,7 +33,7 @@
 
 ;; Ensure installed packages
 (defvar my-packages '(auto-complete
-                      ;;cider
+                      cider
                       clojure-mode
                       color-theme
                       color-theme-sanityinc-tomorrow
