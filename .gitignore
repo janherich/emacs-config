@@ -3,4 +3,5 @@ eshell/
 auto-save-list/*
 ac-comphist.dat
 *~
-.DS_Store
+session.*
+ido.last

@@ -35,6 +35,7 @@
 (defvar my-packages '(auto-complete
                       cider
                       clojure-mode
+                      inf-clojure
                       color-theme
                       color-theme-sanityinc-tomorrow
                       csv-mode
@@ -88,7 +89,7 @@
 (define-key sp-keymap (kbd "C-<left>") 'sp-forward-barf-sexp)
 
 ;; Paredit
-(add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
+(add-hook 'emacs-lisp-mode-hook 'paredit-mode)
 (add-hook 'scheme-mode-hook 'paredit-mode)
 (add-hook 'clojure-mode-hook 'paredit-mode)
 (add-hook 'cider-repl-mode-hook 'paredit-mode)
@@ -105,6 +106,10 @@
 (add-hook 'scheme-mode-hook 'highlight-parentheses-mode)
 (add-hook 'clojure-mode-hook 'highlight-parentheses-mode)
 (add-hook 'cider-repl-mode-hook 'highlight-parentheses-mode)
+
+;; Hook on inferior clojure mode
+(add-hook 'clojurescript-mode-hook 'inf-clojure-minor-mode)
+(add-hook 'inf-clojure-mode-hook 'paredit-mode)
 
 ;; CIDER
 (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
@@ -195,6 +200,10 @@
   '(progn
      (define-key paredit-mode-map (kbd "<M-up>") 'paredit-backward-up)
      (define-key paredit-mode-map (kbd "<M-down>") 'paredit-forward-down)))
+
+(defun figwheel-repl ()
+  (interactive)
+  (run-clojure "lein figwheel"))
 
 ;; Custom identation and cleanup functions
 (defun untabify-buffer ()
