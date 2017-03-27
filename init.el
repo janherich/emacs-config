@@ -67,6 +67,7 @@
                       color-theme-sanityinc-tomorrow
                       csv-mode
                       dash
+                      editorconfig
                       epl
                       erlang
                       haskell-mode
