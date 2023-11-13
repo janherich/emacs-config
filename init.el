@@ -1,3 +1,4 @@
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -10,26 +11,27 @@
  '(auto-save-default nil)
  '(backup-inhibited t t)
  '(column-number-mode t)
- '(csv-separators (quote ("," "|")))
+ '(csv-separators '("," "|"))
  '(cursor-in-non-selected-windows nil)
- '(custom-enabled-themes (quote (sanityinc-tomorrow-night)))
+ '(custom-enabled-themes '(sanityinc-tomorrow-night))
  '(custom-safe-themes
-   (quote
-    ("628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "82d2cac368ccdec2fcc7573f24c3f79654b78bf133096f9b40c20d97ec1d8016" "1b8d67b43ff1723960eb5e0cba512a2c7a2ad544ddb2533a90101fd1852b426e" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" default)))
+   '("628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "82d2cac368ccdec2fcc7573f24c3f79654b78bf133096f9b40c20d97ec1d8016" "1b8d67b43ff1723960eb5e0cba512a2c7a2ad544ddb2533a90101fd1852b426e" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" default))
  '(delete-selection-mode t)
  '(fci-rule-color "#282a2e")
+ '(highlight-parentheses-colors
+   '("#d54e53" "#e78c45" "#e7c547" "#b9ca4a" "#70c0b1" "#7aa6da" "#c397d8"))
  '(hl-paren-colors
-   (quote
-    ("#d54e53" "#e78c45" "#e7c547" "#b9ca4a" "#70c0b1" "#7aa6da" "#c397d8")))
+   '("#d54e53" "#e78c45" "#e7c547" "#b9ca4a" "#70c0b1" "#7aa6da" "#c397d8"))
  '(inhibit-startup-screen t)
  '(initial-scratch-message nil)
  '(menu-bar-mode nil)
+ '(package-selected-packages
+   '(ivy pkg-info magit epl projectile rust-mode graphql-mode gnu-elpa-keyring-update smartparens smart-tab s rainbow-delimiters paredit markdown-mode inf-clojure highlight-parentheses haskell-mode erlang editorconfig csv-mode color-theme-sanityinc-tomorrow cider auto-complete))
  '(scroll-bar-mode nil)
  '(tool-bar-mode nil)
  '(vc-annotate-background nil)
  '(vc-annotate-color-map
-   (quote
-    ((20 . "#cc6666")
+   '((20 . "#cc6666")
      (40 . "#de935f")
      (60 . "#f0c674")
      (80 . "#b5bd68")
@@ -46,14 +48,14 @@
      (300 . "#cc6666")
      (320 . "#de935f")
      (340 . "#f0c674")
-     (360 . "#b5bd68"))))
+     (360 . "#b5bd68")))
  '(vc-annotate-very-old-color nil))
 
 ;; Package.el customization
 (require 'package)
-(package-initialize)
 (add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+             '("melpa" . "http://melpa.org/packages/") t)
+(package-initialize)
 ;;(add-to-list 'package-archives '("melpa-stable" . "http://melpa-stable.milkbox.net/packages") t)
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
 ;;(add-to-list 'package-pinned-packages '(cider . "melpa-stable") t)
@@ -61,9 +63,11 @@
 ;; Ensure installed packages
 (defvar my-packages '(auto-complete
                       cider
+                      ;;company
+                      ;;lsp-mode
+                      ;;lsp-treemacs
                       clojure-mode
                       inf-clojure
-                      color-theme
                       color-theme-sanityinc-tomorrow
                       csv-mode
                       dash
@@ -72,6 +76,7 @@
                       erlang
                       haskell-mode
                       highlight-parentheses
+                      ivy
                       magit
                       markdown-mode
                       org
@@ -80,14 +85,24 @@
                       rainbow-delimiters
                       s
                       smart-tab
-                      smartparens))
+                      smartparens
+                      graphql-mode))
 
 (dolist (p my-packages)
   (when (not (package-installed-p p))
     (package-install p)))
 
+;; GC settings
+;(setq gc-cons-threshold (* 100 1024 1024)
+;      read-process-output-max (* 1024 1024)
+;      treemacs-space-between-root-nodes nil
+;      company-minimum-prefix-length 1
+;      lsp-enable-indentation nil ; uncomment to use cider indentation instead of lsp
+;      lsp-enable-completion-at-point nil ; uncomment to use cider completion instead of lsp
+;      )
+
 ;; Enable spell-checking comments in all prog modes
-;; (add-hook 'prog-mode-hook 'flyspell-prog-mode)
+(add-hook 'prog-mode-hook 'flyspell-prog-mode)
 
 ;; Enable global auto revert mode
 (global-auto-revert-mode t)
@@ -106,8 +121,8 @@
         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
 
 ;; Auto-complete
-(require 'auto-complete-config)
-(ac-config-default)
+;;(require 'auto-complete-config)
+;;(ac-config-default)
 
 ;; Smartparens
 (require 'smartparens-config)
@@ -120,6 +135,9 @@
 (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
 (add-hook 'scheme-mode-hook 'paredit-mode)
 (add-hook 'clojure-mode-hook 'paredit-mode)
+;;(add-hook 'clojure-mode-hook 'lsp)
+;;(add-hook 'clojurescript-mode-hook 'lsp)
+;;(add-hook 'clojurec-mode-hook 'lsp)
 (add-hook 'cider-repl-mode-hook 'paredit-mode)
 
 ;; Highlight-parentheses
@@ -151,7 +169,7 @@
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
 
 ;; Enable flyspell on text-modes
-(add-hook 'text-mode-hook 'turn-on-flyspell)
+;;(add-hook 'text-mode-hook 'turn-on-flyspell)
 
 ;; Super Tab
 (require 'smart-tab)
@@ -194,39 +212,8 @@
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 
-;; Configure org-babel
-(require 'org)
-(require 'ob-clojure)
-
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((sh . t)
-   (emacs-lisp . t)
-   (clojure . t)))
-
-(setq org-babel-clojure-backend 'cider)
-(require 'cider)
-
-(setq org-edit-src-content-indentation 0
-      org-src-tab-acts-natively t
-      org-confirm-babel-evaluate nil
-      org-src-fontify-natively t)
-
-(add-to-list 'org-babel-tangle-lang-exts '("clojure" . "clj"))
-
-(defvar org-babel-default-header-args:clojure
-  '((:results . "silent") (:tangle . "yes")))
-
-;; (defun org-babel-execute:clojure (body params) (lisp-eval-string body) "Done!")
-
-;; (provide 'ob-clojure)
-
 ;; Enable dired buffer replacing
 (put 'dired-find-alternate-file 'disabled nil)
-
-(defun figwheel-repl ()
-  (interactive)
-  (run-clojure "lein figwheel"))
 
 ;; Custom identation and cleanup functions
 (defun untabify-buffer ()
@@ -303,3 +290,20 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+;; Projectile config
+(projectile-mode +1)
+;; Recommended keymap prefix on macOS
+(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+
+;; Clerk show
+(defun clerk-show ()
+  (interactive)
+  (when-let
+      ((filename
+        (buffer-file-name)))
+    (save-buffer)
+    (cider-interactive-eval
+     (concat "(nextjournal.clerk/show! \"" filename "\")"))))
+
+(setq warning-minimum-level :emergency)
